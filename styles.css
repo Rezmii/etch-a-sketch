@@ -1,0 +1,14 @@
+.grid-container {
+  display: flex;
+}
+
+.grid-item {
+  width: 25px;
+  height: 25px;
+  background-color: lightblue;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.test {
+}
