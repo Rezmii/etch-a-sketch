@@ -16,11 +16,28 @@ function renderGrid(num) {
 
   const gridItems = document.querySelectorAll(".grid-item");
 
+  let isMouseDown = false;
+
   gridItems.forEach((singleItem) => {
+    singleItem.addEventListener("mousedown", () => {
+      isMouseDown = true;
+      changeColor(singleItem);
+    });
+
+    singleItem.addEventListener("mouseup", () => {
+      isMouseDown = false;
+    });
+
     singleItem.addEventListener("mouseover", () => {
-      singleItem.setAttribute("style", "background-color: lightcoral");
+      if (isMouseDown) {
+        changeColor(singleItem);
+      }
     });
   });
+}
+
+function changeColor(item) {
+  item.setAttribute("style", "background-color: rgb(86, 88, 90)");
 }
 
 renderGrid(16);
@@ -30,9 +47,14 @@ sizeButton.addEventListener("click", chooseSize);
 
 function chooseSize() {
   let userChoice = prompt("Choose size: ");
-  const gridRows = document.querySelectorAll(".grid-row");
-  gridRows.forEach((singleItem) => {
-    singleItem.remove();
-  });
-  renderGrid(userChoice);
+  if (userChoice <= 64) {
+    const gridRows = document.querySelectorAll(".grid-row");
+    gridRows.forEach((singleItem) => {
+      singleItem.remove();
+    });
+    renderGrid(userChoice);
+  } else {
+    alert("Choose size smaller than 64");
+    chooseSize();
+  }
 }

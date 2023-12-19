@@ -1,12 +1,53 @@
+body {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  background-color: lightgray;
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20%;
+}
+
 .grid-container {
   display: flex;
-  width: 960px;
+  max-width: 960px;
+  box-shadow: 5px 5px 15px;
 }
 
 .grid-item {
   width: 25px;
   height: 25px;
-  background-color: lightblue;
+  background-color: white;
   border: solid 1px;
   box-sizing: border-box;
+}
+
+.size-button {
+  background-color: white;
+  border: 1px solid black;
+  height: 50px;
+  width: 120px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.size-button:hover {
+  transform: scale(1.1);
 }
