@@ -1,5 +1,6 @@
 .grid-container {
   display: flex;
+  width: 960px;
 }
 
 .grid-item {
