@@ -6,9 +6,6 @@
   width: 25px;
   height: 25px;
   background-color: lightblue;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-.test {
+  border: solid 1px;
+  box-sizing: border-box;
 }

@@ -12,3 +12,14 @@ for (let j = 0; j < 16; j++) {
     gridRow.appendChild(gridItem);
   }
 }
+
+const gridItems = document.querySelectorAll(".grid-item");
+
+gridItems.forEach((singleItem) => {
+  singleItem.addEventListener("mouseover", () => {
+    singleItem.setAttribute("style", "background-color: lightcoral");
+  });
+  singleItem.addEventListener("mouseout", () => {
+    singleItem.setAttribute("style", "background-color: lightblue");
+  });
+});
