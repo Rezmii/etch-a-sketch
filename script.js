@@ -1,27 +1,28 @@
 function renderGrid(num) {
   const gridContainer = document.querySelector(".grid-container");
-  let gridItem;
   let gridRow;
   for (let j = 0; j < num; j++) {
     gridRow = document.createElement("div");
     gridRow.classList.add("grid-row");
     gridContainer.appendChild(gridRow);
     for (let i = 0; i < num; i++) {
-      console.log("gridRow");
-      gridItem = document.createElement("div");
+      const gridItem = document.createElement("div");
       gridItem.classList.add("grid-item");
       gridRow.appendChild(gridItem);
     }
   }
 
-  const gridItems = document.querySelectorAll(".grid-item");
+  mousePainting();
+}
 
+function mousePainting(color = "black") {
+  const gridItems = document.querySelectorAll(".grid-item");
   let isMouseDown = false;
 
   gridItems.forEach((singleItem) => {
     singleItem.addEventListener("mousedown", () => {
       isMouseDown = true;
-      changeColor(singleItem);
+      changeColor(singleItem, color);
     });
 
     singleItem.addEventListener("mouseup", () => {
@@ -30,20 +31,26 @@ function renderGrid(num) {
 
     singleItem.addEventListener("mouseover", () => {
       if (isMouseDown) {
-        changeColor(singleItem);
+        changeColor(singleItem, color);
       }
     });
   });
 }
 
-function changeColor(item) {
-  item.setAttribute("style", "background-color: rgb(86, 88, 90)");
+function changeColor(item, color) {
+  item.setAttribute("style", `background-color: ${color}`);
 }
 
 renderGrid(16);
 
 const sizeButton = document.querySelector(".size-button");
 sizeButton.addEventListener("click", chooseSize);
+const clearButton = document.querySelector(".clear-button");
+clearButton.addEventListener("click", clearGrid);
+const colorPallete = document.querySelector(".color-pallete");
+colorPallete.addEventListener("input", (e) => {
+  pickColor(e);
+});
 
 function chooseSize() {
   let userChoice = prompt("Choose size: ");
@@ -57,4 +64,16 @@ function chooseSize() {
     alert("Choose size smaller than 64");
     chooseSize();
   }
+}
+
+function clearGrid() {
+  const gridItems = document.querySelectorAll(".grid-item");
+  gridItems.forEach((singleItem) => {
+    singleItem.setAttribute("style", "background-color: white");
+  });
+}
+
+function pickColor(e) {
+  let color = e.target.value;
+  mousePainting(color);
 }
