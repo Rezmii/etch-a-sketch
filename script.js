@@ -1,3 +1,19 @@
+const eraserButton = document.querySelector(".eraser-button");
+eraserButton.addEventListener("click", eraseGrid);
+const clearButton = document.querySelector(".clear-button");
+clearButton.addEventListener("click", clearGrid);
+const colorPallete = document.querySelector(".color-pallete");
+colorPallete.addEventListener("input", (e) => {
+  pickColor(e);
+});
+const sizeRange = document.querySelector(".size-range");
+sizeRange.addEventListener("input", (e) => {
+  const size = e.target.value;
+  renderSize(size);
+  changeSize(size);
+});
+const sizeValue = document.querySelector(".size-value");
+
 function renderGrid(num) {
   const gridContainer = document.querySelector(".grid-container");
   let gridRow;
@@ -41,29 +57,20 @@ function changeColor(item, color) {
   item.setAttribute("style", `background-color: ${color}`);
 }
 
-renderGrid(16);
+function renderSize(size) {
+  sizeValue.innerHTML = `<p>${size}x${size}</p>`;
+}
 
-const sizeButton = document.querySelector(".size-button");
-sizeButton.addEventListener("click", chooseSize);
-const clearButton = document.querySelector(".clear-button");
-clearButton.addEventListener("click", clearGrid);
-const colorPallete = document.querySelector(".color-pallete");
-colorPallete.addEventListener("input", (e) => {
-  pickColor(e);
-});
+function changeSize(size) {
+  const gridRows = document.querySelectorAll(".grid-row");
+  gridRows.forEach((singleItem) => {
+    singleItem.remove();
+  });
+  renderGrid(size);
+}
 
-function chooseSize() {
-  let userChoice = prompt("Choose size: ");
-  if (userChoice <= 64) {
-    const gridRows = document.querySelectorAll(".grid-row");
-    gridRows.forEach((singleItem) => {
-      singleItem.remove();
-    });
-    renderGrid(userChoice);
-  } else {
-    alert("Choose size smaller than 64");
-    chooseSize();
-  }
+function eraseGrid() {
+  mousePainting("white");
 }
 
 function clearGrid() {
@@ -77,3 +84,6 @@ function pickColor(e) {
   let color = e.target.value;
   mousePainting(color);
 }
+
+renderGrid(16);
+renderSize(16);
