@@ -1,11 +1,39 @@
+let buttonMode;
 const rainbowButton = document.querySelector(".rainbow-button");
-rainbowButton.addEventListener("click", chooseRainbowMode);
+rainbowButton.addEventListener("click", () => {
+  chooseRainbowMode();
+  buttonMode = getButtonMode(rainbowButton);
+  changeButtonColor(buttonMode);
+});
 const normalButton = document.querySelector(".normal-button");
-normalButton.addEventListener("click", chooseNormalMode);
+normalButton.addEventListener("click", () => {
+  chooseNormalMode();
+  buttonMode = getButtonMode(normalButton);
+  changeButtonColor(buttonMode);
+});
 const eraserButton = document.querySelector(".eraser-button");
-eraserButton.addEventListener("click", eraseGrid);
+eraserButton.addEventListener("click", () => {
+  eraseGrid();
+  buttonMode = getButtonMode(eraserButton);
+  changeButtonColor(buttonMode);
+});
 const clearButton = document.querySelector(".clear-button");
 clearButton.addEventListener("click", clearGrid);
+
+function getButtonMode(button) {
+  return (buttonMode = button.getAttribute("data-id"));
+}
+
+function changeButtonColor(mode) {
+  normalButton.classList.remove("choosen-button");
+  rainbowButton.classList.remove("choosen-button");
+  eraserButton.classList.remove("choosen-button");
+  if (mode === "normal") {
+    normalButton.classList.add("choosen-button");
+  } else if (mode === "rainbow") rainbowButton.classList.add("choosen-button");
+  else eraserButton.classList.add("choosen-button");
+}
+
 const colorPallete = document.querySelector(".color-pallete");
 colorPallete.addEventListener("input", (e) => {
   pickColor(e);

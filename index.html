@@ -15,9 +15,15 @@
   <body>
     <nav>
       <input type="color" class="color-pallete" />
-      <button class="btn normal-button">Normal mode</button>
-      <button class="btn rainbow-button">Rainbow mode</button>
-      <button class="btn eraser-button">Eraser</button>
+      <button class="btn normal-button js-button" data-id="normal">
+        Normal mode
+      </button>
+      <button class="btn rainbow-button js-button" data-id="rainbow">
+        Rainbow mode
+      </button>
+      <button class="btn eraser-button js-button" data-id="eraser">
+        Eraser
+      </button>
       <button class="btn clear-button">Clear</button>
       <div class="size-value"></div>
       <input type="range" class="size-range" min="1" max="64" value="16" />
