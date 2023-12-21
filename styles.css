@@ -111,6 +111,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 .choosen-button {
   background-color: black;
-  border: none
+  border: none;
   color: white;
 }
