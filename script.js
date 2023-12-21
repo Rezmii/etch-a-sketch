@@ -1,4 +1,8 @@
 let buttonMode;
+let colors = {
+  normal: "black",
+  rainbow: null,
+};
 const rainbowButton = document.querySelector(".rainbow-button");
 rainbowButton.addEventListener("click", () => {
   chooseRainbowMode();
@@ -20,6 +24,18 @@ eraserButton.addEventListener("click", () => {
 const clearButton = document.querySelector(".clear-button");
 clearButton.addEventListener("click", clearGrid);
 
+const colorPallete = document.querySelector(".color-pallete");
+colorPallete.addEventListener("input", (e) => {
+  color = getColor(e);
+});
+const sizeRange = document.querySelector(".size-range");
+sizeRange.addEventListener("input", (e) => {
+  const size = e.target.value;
+  renderSize(size);
+  changeSize(size);
+});
+const sizeValue = document.querySelector(".size-value");
+
 function getButtonMode(button) {
   return (buttonMode = button.getAttribute("data-id"));
 }
@@ -33,18 +49,6 @@ function changeButtonColor(mode) {
   } else if (mode === "rainbow") rainbowButton.classList.add("choosen-button");
   else eraserButton.classList.add("choosen-button");
 }
-
-const colorPallete = document.querySelector(".color-pallete");
-colorPallete.addEventListener("input", (e) => {
-  pickColor(e);
-});
-const sizeRange = document.querySelector(".size-range");
-sizeRange.addEventListener("input", (e) => {
-  const size = e.target.value;
-  renderSize(size);
-  changeSize(size);
-});
-const sizeValue = document.querySelector(".size-value");
 
 function renderGrid(num) {
   const gridContainer = document.querySelector(".grid-container");
@@ -91,8 +95,9 @@ function changeColor(item, mode) {
   } else if (mode === "eraser") {
     item.setAttribute("style", `background-color: white`);
   } else if (mode === "normal") {
-    item.setAttribute("style", `background-color: black`);
-  } else item.setAttribute("style", `background-color: ${mode}`);
+    const itemColor = colors.normal;
+    item.setAttribute("style", `background-color: ${itemColor}`);
+  }
 }
 
 function renderSize(size) {
@@ -118,13 +123,12 @@ function clearGrid() {
   });
 }
 
-function pickColor(e) {
-  let color = e.target.value;
-  mousePainting(color);
+function getColor(e) {
+  return (colors.normal = e.target.value);
 }
 
 function chooseNormalMode() {
-  mousePainting();
+  mousePainting("normal");
 }
 
 function chooseRainbowMode() {
@@ -136,10 +140,8 @@ function rainbowPainting(item) {
   for (let i = 0; i < 3; i++) {
     rgbArr[i] = Math.floor(Math.random() * (255 - 0) + 0);
   }
-  console.log(rgbArr);
-  color = "#" + rgbToHex(rgbArr[0], rgbArr[1], rgbArr[2]);
-  console.log(color);
-  item.setAttribute("style", `background-color: ${color}`);
+  colors.rainbow = "#" + rgbToHex(rgbArr[0], rgbArr[1], rgbArr[2]);
+  item.setAttribute("style", `background-color: ${colors.rainbow}`);
 }
 
 function valueToHex(c) {
